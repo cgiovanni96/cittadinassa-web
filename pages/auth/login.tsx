@@ -1,103 +1,37 @@
-import {
-  Center,
-  Container,
-  PasswordInput,
-  TextInput,
-  Button,
-  Text,
-} from "@mantine/core";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { X } from "tabler-icons-react";
+import { Box, Center, Container, Text } from "@mantine/core";
+import Image from "next/image";
 
-import { LoginDto } from "@auth/api/auth.type";
-import { useLogin } from "@auth/api/hooks";
-import { useNotifications } from "@mantine/notifications";
-import { useRouter } from "next/router";
-import { tokenStore } from "@global/store/token.store";
-import { useQueryClient } from "react-query";
+import { useCurrent } from "@modules/auth/api/hooks";
+import { LoginForm } from "@modules/auth/components/LoginForm.component";
 
-const schema = z.object({
-  email: z
-    .string()
-    .email({ message: "Devi inserire un indirizzo email valido" }),
-  password: z.string(),
-});
+const Error = () => {
+  return (
+    <Box>
+      <Center>
+        <Box sx={{ width: "80%", height: 400, position: "relative" }}>
+          <Image src="/jelly.png" alt="Nassano Pacco" layout="fill" />
+        </Box>
+      </Center>
+      <Text align="center" sx={{ fontSize: 25 }} variant="gradient">
+        WEEEE sei gia loggato
+      </Text>
+      <Text align="center" sx={{ fontSize: 15 }} variant="gradient">
+        Pacco
+      </Text>
+    </Box>
+  );
+};
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<LoginDto>({ resolver: zodResolver(schema) });
+  const { isSuccess } = useCurrent();
 
-  const client = useQueryClient();
-
-  const { setToken } = tokenStore();
-  const { mutate, isError, isSuccess, isLoading, data } = useLogin();
-
-  const onSubmit = async (loginData: LoginDto) => mutate(loginData);
-
-  const notifications = useNotifications();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setToken(data.token);
-      client.invalidateQueries("currentUser");
-      router.push("/");
-    }
-  }, [isSuccess, data]);
-
-  useEffect(() => {
-    if (isError) {
-      reset();
-
-      notifications.showNotification({
-        id: "login-error",
-        autoClose: 3000,
-        title: "Errore nell'accesso",
-        message: "Controlla le credenziale",
-        color: "red",
-        icon: <X color="white" />,
-      });
-    }
-  }, [isError]);
+  console.log("weeee", isSuccess);
 
   return (
     <Center>
       <Container style={{ width: "40%" }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <TextInput
-            id="0"
-            placeholder="Email"
-            label="Email"
-            required
-            {...register("email")}
-          />
-          <Text color="red">{errors.email?.message}</Text>
-
-          <PasswordInput
-            id="1"
-            placeholder="Password"
-            label="Password"
-            required
-            {...register("password")}
-          />
-          <Text color="red">{errors.password?.message}</Text>
-          {isError && <Text color="red">Email o password sbagliate</Text>}
-
-          <Button
-            type="submit"
-            style={{ marginTop: "2rem" }}
-            loading={isLoading}
-          >
-            Accedi
-          </Button>
-        </form>
+        {isSuccess && <Error />}
+        {!isSuccess && <LoginForm />}
       </Container>
     </Center>
   );

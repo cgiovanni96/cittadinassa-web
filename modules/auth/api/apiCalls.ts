@@ -1,5 +1,3 @@
-import { useQuery, useMutation } from "react-query";
-
 import { User } from "@model/User.model";
 import { LoginDto } from "./auth.type";
 import { request } from "@lib/api/client";
@@ -22,7 +20,6 @@ export const login = async (loginDto: LoginDto) => {
     data: loginDto,
   });
 
-  console.log("RES", response, error);
   if (error || !response) throw new Error();
   return response.data;
 };

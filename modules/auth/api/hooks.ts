@@ -1,15 +1,16 @@
+import { calls } from "data/api.data";
 import { useQuery, useMutation } from "react-query";
 
-import { current, login, logout } from "./api";
+import { current, login, logout } from "./apiCalls";
 
 export const useCurrent = () => {
-  return useQuery("currentUser", current, { retry: 1 });
+  return useQuery(calls.currentUser, current, { retry: 1 });
 };
 
 export const useLogin = () => {
-  return useMutation("loginUser", login);
+  return useMutation(calls.login, login);
 };
 
 export const useLogout = () => {
-  return useMutation("logoutUser", logout);
+  return useMutation(calls.logout, logout);
 };
