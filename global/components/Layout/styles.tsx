@@ -36,13 +36,8 @@ export const layoutStyles = createStyles((theme) => ({
 export const headerStyles = createStyles((theme) => ({
   header: {
     paddingTop: theme.spacing.sm,
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[6]
-        : theme.colors.gray[0],
-    borderBottom: `1px solid ${
-      theme.colorScheme === "dark" ? "transparent" : theme.colors.gray[2]
-    }`,
+    backgroundColor: theme.colors.dark[6],
+    borderBottom: `1px solid transparent`,
     marginBottom: 40,
   },
 
@@ -71,17 +66,12 @@ export const headerStyles = createStyles((theme) => ({
     height: 38,
 
     "&:hover": {
-      backgroundColor:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[5]
-          : theme.colors.gray[1],
+      backgroundColor: theme.colors.dark[5],
     },
   },
 
   tabControlActive: {
-    borderColor: `${
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.colors.gray[2]
-    } !important`,
+    borderColor: `${theme.colors.dark[7]} !important`,
   },
 }));
 

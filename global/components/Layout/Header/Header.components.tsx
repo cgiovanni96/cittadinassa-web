@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Group, Tabs, Burger, Text } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
 
@@ -12,10 +12,6 @@ import Link from "next/link";
 
 const RightSide = () => {
   const { data, isSuccess } = useCurrent();
-
-  // useEffect(() => {
-  //   userQuery.refetch();
-  // }, [token]);
 
   return (
     <>
@@ -31,8 +27,13 @@ const RightSide = () => {
 export const Header = () => {
   const { classes } = headerStyles();
   const [opened, toggleOpened] = useBooleanToggle(false);
-
+  const [active, setActive] = useState(0);
   const router = useRouter();
+
+  useEffect(() => {
+    const idx = PAGES.findIndex((page) => page.path === router.pathname);
+    setActive(idx);
+  }, [router.pathname]);
 
   const items = PAGES.map((page) => (
     <Tabs.Tab label={page.name} key={page.name.toLowerCase()} />
@@ -58,6 +59,7 @@ export const Header = () => {
       </Container>
       <Container>
         <Tabs
+          active={active}
           variant="outline"
           classNames={{
             root: classes.tabs,
@@ -67,6 +69,7 @@ export const Header = () => {
           }}
           onTabChange={(tabIdx) => {
             router.push(PAGES[tabIdx].path);
+            setActive(tabIdx);
           }}
         >
           {items}
