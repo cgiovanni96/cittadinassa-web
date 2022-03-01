@@ -17,6 +17,9 @@ export const layoutStyles = createStyles((theme) => ({
   },
   main: {
     flex: "1",
+    display: "flex",
+    width: "100vw",
+    flexDirection: "column",
   },
   drawerLowerPortion: {
     display: "flex",

@@ -1,12 +1,12 @@
-import { Tabs, AppShell, Box, Text, Drawer, Center } from "@mantine/core";
+import { useUnconfirmedNotification } from "@global/hooks/useUnconfirmedNotification.hook";
+import { Tabs, AppShell, Text, Drawer, Center, Container } from "@mantine/core";
 import { useState } from "react";
+
 import { Header } from "./Header/Header.components";
 import { layoutStyles } from "./styles";
 
 const NavbarLinks = ({ drawer }: { drawer?: boolean }): JSX.Element => {
-  const tabChangeCallback = (tabKey?: string): void => {
-    console.log("tabkey", tabKey);
-  };
+  const tabChangeCallback = (tabKey?: string): void => {};
 
   return (
     <Tabs
@@ -32,8 +32,11 @@ export const Layout = ({
 }: {
   children: React.ReactNode;
 }): JSX.Element => {
+  // CUSTOM HOOKS
+  useUnconfirmedNotification();
+  // HOOKS
   const [opened, setOpened] = useState(false);
-
+  // STYLES
   const { classes } = layoutStyles();
 
   return (
@@ -41,7 +44,7 @@ export const Layout = ({
       padding="md"
       header={<Header />}
       className={classes.app}
-      classNames={{ body: classes.main }}
+      classNames={{ body: classes.main, main: classes.main }}
     >
       <Drawer
         opened={opened}
@@ -53,12 +56,11 @@ export const Layout = ({
       >
         <Center>
           <NavbarLinks drawer={true} />
-          <Box className={classes.drawerLowerPortion}>
-            <Text>Téma</Text>
-          </Box>
+          <Text>Téma</Text>
         </Center>
       </Drawer>
-      <Box className={classes.main}>{children}</Box>
+
+      <Container className={classes.main}>{children}</Container>
     </AppShell>
   );
 };

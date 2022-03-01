@@ -12,7 +12,8 @@ export const api = axios.create({
 // optionaly add base url
 
 export const apiWithConfig = (): AxiosInstance => {
-  const token = JSON.parse(window.localStorage.getItem(TOKEN) || "");
+  const localToken = window.localStorage.getItem(TOKEN);
+  const token = localToken ? JSON.parse(localToken) : null;
   if (token) {
     api.defaults.headers.common.Authorization = `Bearer ${token}`;
   }

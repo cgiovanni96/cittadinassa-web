@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Container, Group, Tabs, Burger, Text } from "@mantine/core";
+import { Container, Group, Tabs, Burger, Text, Box } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
 
 import { headerStyles } from "../styles";
 import { UserMenu } from "./UserMenu.component";
-import { useCurrent } from "../../../../modules/auth/api/hooks";
+import { useCurrent } from "@auth/api/hooks";
 import { ActionMenu } from "./ActionMenu.component";
 import { PAGES } from "data/global.data";
 import { useRouter } from "next/router";
 import Link from "next/link";
+
+const iconDefaults = { strokeWidth: 1 };
 
 const RightSide = () => {
   const { data, isSuccess } = useCurrent();
@@ -36,7 +38,11 @@ export const Header = () => {
   }, [router.pathname]);
 
   const items = PAGES.map((page) => (
-    <Tabs.Tab label={page.name} key={page.name.toLowerCase()} />
+    <Tabs.Tab
+      label={page.name}
+      icon={<page.Icon {...iconDefaults} />}
+      key={page.name.toLowerCase()}
+    />
   ));
 
   return (
@@ -75,6 +81,22 @@ export const Header = () => {
           {items}
         </Tabs>
       </Container>
+      {/* {isSuccess && data && !data.user.authInfo.confirmed && (
+        <Container
+          fluid
+          sx={(theme) => ({
+            marginTop: 20,
+            background: theme.colors.yellow,
+            padding: 8,
+          })}
+          color="blue"
+        >
+          <Text align="center" color="white">
+            Ricorda di confermare il tuo Account, usando il link che ti abbiamo
+            mandato per mail!
+          </Text>
+        </Container>
+      )} */}
     </div>
   );
 };

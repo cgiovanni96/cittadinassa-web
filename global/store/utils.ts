@@ -1,8 +1,17 @@
-export const getLocalStorage = (key: string): string => {
-  const ww = global.window;
-  return ww ? JSON.parse(ww.localStorage.getItem(key) || "") : "";
+import { TokenStore } from "./token.store";
+
+export const getLocalStorage = (key: string, store: TokenStore): string => {
+  if (!store) return "";
+  const token = store.storage ? store.storage.getItem(key) : null;
+  if (token === null) return "";
+  return JSON.parse(token) || "";
 };
-export const setLocalStorage = (key: string, value: string) => {
-  const ww = global.window;
-  ww && ww.localStorage.setItem(key, JSON.stringify(value));
+
+export const setLocalStorage = (
+  key: string,
+  value: string,
+  store: TokenStore
+) => {
+  if (!store.storage) return;
+  store.storage!.setItem(key, JSON.stringify(value));
 };

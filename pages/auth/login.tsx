@@ -1,37 +1,20 @@
-import { Box, Center, Container, Text } from "@mantine/core";
-import Image from "next/image";
+import { Error } from "@global/components/Utility/Error.component";
+import { Loader } from "@global/components/Utility/Loader.components";
+import { Center, Container } from "@mantine/core";
 
 import { useCurrent } from "@modules/auth/api/hooks";
 import { LoginForm } from "@modules/auth/components/LoginForm.component";
 
-const Error = () => {
-  return (
-    <Box>
-      <Center>
-        <Box sx={{ width: "80%", height: 400, position: "relative" }}>
-          <Image src="/jelly.png" alt="Nassano Pacco" layout="fill" />
-        </Box>
-      </Center>
-      <Text align="center" sx={{ fontSize: 25 }} variant="gradient">
-        WEEEE sei gia loggato
-      </Text>
-      <Text align="center" sx={{ fontSize: 15 }} variant="gradient">
-        Pacco
-      </Text>
-    </Box>
-  );
-};
-
 const Login = () => {
-  const { isSuccess } = useCurrent();
-
-  console.log("weeee", isSuccess);
-
+  const { isSuccess: isAlreadyLogged, isLoading } = useCurrent();
   return (
     <Center>
-      <Container style={{ width: "40%" }}>
-        {isSuccess && <Error />}
-        {!isSuccess && <LoginForm />}
+      <Container style={{ width: "60%" }}>
+        {isAlreadyLogged && (
+          <Error header="SEI GIA LOGGATO" subHeader="Cosa ci fai qui?" />
+        )}
+        {isLoading && <Loader />}
+        {!isLoading && !isAlreadyLogged && <LoginForm />}
       </Container>
     </Center>
   );

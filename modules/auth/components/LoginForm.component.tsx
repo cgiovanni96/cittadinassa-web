@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { X } from "tabler-icons-react";
+import { X, Mail, Lock } from "tabler-icons-react";
 
-import { LoginDto } from "@auth/api/auth.type";
+import { LoginDto } from "@auth/api/auth.dto";
 import { useLogin } from "@auth/api/hooks";
 import { useNotifications } from "@mantine/notifications";
 import { useRouter } from "next/router";
@@ -18,6 +18,8 @@ const schema = z.object({
   email: z.string().email({ message: LOGIN.MESSAGES.WRONG_EMAIL }),
   password: z.string(),
 });
+
+const iconDefaults = { size: 20, strokeWidth: 1 };
 
 export const LoginForm = () => {
   const {
@@ -32,7 +34,9 @@ export const LoginForm = () => {
   const { setToken } = tokenStore();
   const { mutate, isError, isSuccess, isLoading, data } = useLogin();
 
-  const onSubmit = async (loginData: LoginDto) => mutate(loginData);
+  const onSubmit = async (loginData: LoginDto) => {
+    mutate(loginData);
+  };
 
   const notifications = useNotifications();
   const router = useRouter();
@@ -63,7 +67,9 @@ export const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextInput
+        variant="default"
         id="0"
+        icon={<Mail {...iconDefaults} />}
         placeholder={LOGIN.FIELDS.EMAIL}
         label={LOGIN.FIELDS.EMAIL}
         required
@@ -72,7 +78,9 @@ export const LoginForm = () => {
       <Text color="red">{errors.email?.message}</Text>
 
       <PasswordInput
+        variant="default"
         id="1"
+        icon={<Lock {...iconDefaults} />}
         placeholder={LOGIN.FIELDS.PASSWORD}
         label={LOGIN.FIELDS.PASSWORD}
         required

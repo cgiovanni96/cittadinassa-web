@@ -1,6 +1,7 @@
 import { tokenStore } from "@global/store/token.store";
 import { UnstyledButton, Group, Avatar, Menu, Text } from "@mantine/core";
 import { useLogout } from "@modules/auth/api/hooks";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { ChevronDown, Settings, Logout } from "tabler-icons-react";
@@ -17,6 +18,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
   const { token, setToken } = tokenStore();
   const mutation = useLogout();
   const client = useQueryClient();
+  const router = useRouter();
 
   useEffect(() => {
     if (mutation.isSuccess && token !== "") {
@@ -50,7 +52,14 @@ export const UserMenu = ({ user }: UserMenuProps) => {
       }
     >
       <Menu.Label>Impostazioni</Menu.Label>
-      <Menu.Item icon={<Settings size={14} />}>Impostazioni</Menu.Item>
+      <Menu.Item
+        icon={<Settings size={14} />}
+        onClick={() => {
+          router.push("/user/settings");
+        }}
+      >
+        Impostazioni
+      </Menu.Item>
       <Menu.Item
         color="red"
         icon={<Logout size={14} />}
