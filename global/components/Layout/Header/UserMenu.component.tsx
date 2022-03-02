@@ -9,9 +9,10 @@ import { userMenuStyles } from "../styles";
 
 interface UserMenuProps {
   user: { name: string };
+  onClick?: () => void;
 }
 
-export const UserMenu = ({ user }: UserMenuProps) => {
+export const UserMenu = ({ user, onClick }: UserMenuProps) => {
   const { classes, cx } = userMenuStyles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
@@ -19,6 +20,10 @@ export const UserMenu = ({ user }: UserMenuProps) => {
   const mutation = useLogout();
   const client = useQueryClient();
   const router = useRouter();
+
+  const clicking = () => {
+    onClick && onClick();
+  };
 
   useEffect(() => {
     if (mutation.isSuccess && token !== "") {
@@ -56,6 +61,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
         icon={<Settings size={14} />}
         onClick={() => {
           router.push("/user/settings");
+          clicking();
         }}
       >
         Impostazioni
@@ -63,7 +69,10 @@ export const UserMenu = ({ user }: UserMenuProps) => {
       <Menu.Item
         color="red"
         icon={<Logout size={14} />}
-        onClick={() => mutation.mutate()}
+        onClick={() => {
+          mutation.mutate();
+          clicking();
+        }}
       >
         Esci
       </Menu.Item>

@@ -38,43 +38,31 @@ export const layoutStyles = createStyles((theme) => ({
 
 export const headerStyles = createStyles((theme) => ({
   header: {
+    width: "100vw",
     paddingTop: theme.spacing.sm,
     backgroundColor: theme.colors.dark[6],
     borderBottom: `1px solid transparent`,
     marginBottom: 40,
+    maxWidth: "100vw",
   },
 
   mainSection: {
     paddingBottom: theme.spacing.sm,
   },
 
+  rightSide: {
+    display: "none",
+    [theme.fn.largerThan("sm")]: {
+      flex: "1",
+      display: "flex",
+      justifyContent: "flex-end",
+    },
+  },
+
   burger: {
-    [theme.fn.largerThan("xs")]: {
+    [theme.fn.largerThan("sm")]: {
       display: "none",
     },
-  },
-
-  tabs: {
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  tabsList: {
-    borderBottom: "0 !important",
-  },
-
-  tabControl: {
-    fontWeight: 500,
-    height: 38,
-
-    "&:hover": {
-      backgroundColor: theme.colors.dark[5],
-    },
-  },
-
-  tabControlActive: {
-    borderColor: `${theme.colors.dark[7]} !important`,
   },
 }));
 
@@ -104,5 +92,50 @@ export const userMenuStyles = createStyles((theme) => ({
   userActive: {
     backgroundColor:
       theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
+  },
+}));
+
+/* -------------------------------------------------------------------------- */
+/*                                 NAVIGATION                                 */
+/* -------------------------------------------------------------------------- */
+
+export const navigationStyles = createStyles((theme) => ({
+  tabs: {
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
+    },
+  },
+
+  tabsList: {
+    borderBottom: "0 !important",
+  },
+
+  tabControl: {
+    fontWeight: 500,
+    height: 38,
+
+    "&:hover": {
+      backgroundColor: theme.colors.dark[5],
+    },
+  },
+
+  tabControlActive: {
+    borderColor: `${theme.colors.dark[7]} !important`,
+  },
+
+  drawerTabs: {
+    marginTop: 20,
+    width: "100%",
+  },
+
+  drawerTabControl: {
+    flex: "1",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+  },
+  drawerTabsListWrapper: {
+    width: "100%",
   },
 }));
