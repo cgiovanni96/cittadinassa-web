@@ -17,11 +17,7 @@ const DesktopRightSide = () => {
 
   return (
     <Container className={classes.rightSide}>
-      {isSuccess && data ? (
-        <UserMenu user={{ name: data.user.name }} />
-      ) : (
-        <ActionMenu />
-      )}
+      {isSuccess && data ? <UserMenu user={data.user} /> : <ActionMenu />}
     </Container>
   );
 };

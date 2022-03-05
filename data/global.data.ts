@@ -1,4 +1,4 @@
-import { Home, Social, Seeding, Icon } from "tabler-icons-react";
+import { Home, Social, Anchor, Icon } from "tabler-icons-react";
 
 export type Page = {
   path: string;
@@ -8,5 +8,5 @@ export type Page = {
 export const PAGES: Page[] = [
   { path: "/", name: "Home", Icon: Home },
   { path: "/associazione", name: "Associazione", Icon: Social },
-  { path: "/rete", name: "Rete", Icon: Seeding },
+  { path: "/bacheca", name: "Bacheca", Icon: Anchor },
 ];

@@ -42,7 +42,7 @@ export const headerStyles = createStyles((theme) => ({
     paddingTop: theme.spacing.sm,
     backgroundColor: theme.colors.dark[6],
     borderBottom: `1px solid transparent`,
-    marginBottom: 40,
+    marginBottom: 20,
     maxWidth: "100vw",
   },
 

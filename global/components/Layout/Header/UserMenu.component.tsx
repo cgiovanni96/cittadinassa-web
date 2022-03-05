@@ -1,5 +1,15 @@
+import { RoleBadge } from "@global/components/RoleBadge.component";
 import { tokenStore } from "@global/store/token.store";
-import { UnstyledButton, Group, Avatar, Menu, Text } from "@mantine/core";
+import {
+  UnstyledButton,
+  Group,
+  Avatar,
+  Menu,
+  Text,
+  Badge,
+  Divider,
+} from "@mantine/core";
+import { User } from "@model/User.model";
 import { useLogout } from "@modules/auth/api/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -8,7 +18,7 @@ import { ChevronDown, Settings, Logout } from "tabler-icons-react";
 import { userMenuStyles } from "../styles";
 
 interface UserMenuProps {
-  user: { name: string };
+  user: User;
   onClick?: () => void;
 }
 
@@ -47,7 +57,13 @@ export const UserMenu = ({ user, onClick }: UserMenuProps) => {
           })}
         >
           <Group spacing={7}>
-            <Avatar alt={user.name} radius="xl" size={20} src={undefined} />
+            <Avatar
+              alt={user.name}
+              radius="xl"
+              size={25}
+              src={undefined}
+              color="blue"
+            />
             <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
               {user.name}
             </Text>
@@ -56,7 +72,10 @@ export const UserMenu = ({ user, onClick }: UserMenuProps) => {
         </UnstyledButton>
       }
     >
-      <Menu.Label>Impostazioni</Menu.Label>
+      <Menu.Item rightSection={<RoleBadge role={user.profile.globalRole} />}>
+        Ruolo
+      </Menu.Item>
+      <Divider />
       <Menu.Item
         icon={<Settings size={14} />}
         onClick={() => {

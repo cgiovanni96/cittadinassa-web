@@ -1,10 +1,16 @@
 import { Children } from "@lib/types/Children.type";
 import { Center, Container } from "@mantine/core";
 
-export const Page = (props: Children) => {
+export type PageProps = {
+  width?: string;
+} & Children;
+
+export const Page = (props: PageProps) => {
   return (
     <Center>
-      <Container style={{ width: "60%" }}>{props.children}</Container>
+      <Container style={{ width: props.width ? props.width : "100%" }}>
+        {props.children}
+      </Container>
     </Center>
   );
 };

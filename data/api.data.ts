@@ -4,4 +4,6 @@ export enum calls {
   logout = "logout",
   createUser = "createUser",
   confirmUser = "confirmUser",
+  getAllFishes = "getAllFishes",
+  uploadCover = "uploadCover",
 }
