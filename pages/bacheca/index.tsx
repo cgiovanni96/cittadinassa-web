@@ -1,6 +1,6 @@
 import { Page } from "@global/components/Layout/Page.component";
-import { FishList } from "@modules/bacheca/components/FishList.component";
-import { Hero } from "@modules/bacheca/components/Hero.component";
+import { FishList } from "@modules/bacheca/components/Fishes/Fishes.list";
+import { Hero } from "@modules/bacheca/components/Hero.section";
 
 export const Rete = () => {
   return (
@@ -10,5 +10,4 @@ export const Rete = () => {
     </Page>
   );
 };
-
 export default Rete;

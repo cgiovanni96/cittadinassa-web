@@ -1,9 +1,16 @@
+import { UploadedFile } from "@global/types/file.type";
 import Model from "../Base.model";
 
 export enum FISH_TYPE {
   PROJECT = "project",
   EVENT = "event",
   GROUP = "group",
+}
+
+export enum FISH_STATUS {
+  IDEA = "idea",
+  ONGOING = "in corso",
+  ENDED = "finito",
 }
 
 export enum ROLES {
@@ -14,16 +21,25 @@ export enum ROLES {
 export default interface Fish extends Model {
   name: string;
   codename: string;
+  introduction: string;
   description?: string;
   type: FISH_TYPE;
+  status: FISH_STATUS;
   extra: FishExtraInfo;
+  media: FishMediaInfo;
   roles: FishToRole[];
   eventIds: string[];
 }
 
 export interface FishExtraInfo {
-  drive: string;
-  discord: string;
+  drive?: string;
+  discord?: string;
+}
+
+export interface FishMediaInfo {
+  color?: string;
+  emoji?: string;
+  cover?: UploadedFile;
 }
 
 export interface FishToRole {

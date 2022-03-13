@@ -6,4 +6,6 @@ export enum calls {
   confirmUser = "confirmUser",
   getAllFishes = "getAllFishes",
   uploadCover = "uploadCover",
+  createFish = "createFish",
+  getFish = "getFish",
 }

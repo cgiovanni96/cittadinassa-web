@@ -1,12 +1,16 @@
-import { FishForm } from "@modules/bacheca/components/FishForm.component";
+import { Page } from "@global/components/Layout/Page.component";
+import { FishForm } from "@modules/bacheca/components/Form/Fish.form";
 import { UploadCover } from "@modules/bacheca/components/UploadCover.component";
+import { useState } from "react";
 
 const New = () => {
+  const [cover, setCover] = useState<File | undefined>(undefined);
+
   return (
-    <>
-      <UploadCover />
-      <FishForm />
-    </>
+    <Page>
+      <UploadCover setInfo={setCover} />
+      <FishForm cover={cover} />
+    </Page>
   );
 };
 

@@ -8,6 +8,7 @@ export const layoutStyles = createStyles((theme) => ({
   app: {
     minHeight: "100vh",
     display: "flex",
+    width: "100%",
     flexDirection: "column",
   },
   header: {
@@ -18,8 +19,21 @@ export const layoutStyles = createStyles((theme) => ({
   main: {
     flex: "1",
     display: "flex",
-    width: "100vw",
     flexDirection: "column",
+    width: "100%",
+    marginLeft: 0,
+    marginRight: 0,
+    padding: 0,
+    paddingBottom: theme.spacing.lg,
+  },
+
+  pageRoot: {
+    flex: "1",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    maxWidth: "100vw",
+    padding: 0,
   },
   drawerLowerPortion: {
     display: "flex",
@@ -38,12 +52,11 @@ export const layoutStyles = createStyles((theme) => ({
 
 export const headerStyles = createStyles((theme) => ({
   header: {
-    width: "100vw",
     paddingTop: theme.spacing.sm,
     backgroundColor: theme.colors.dark[6],
     borderBottom: `1px solid transparent`,
-    marginBottom: 20,
     maxWidth: "100vw",
+    width: "100%",
   },
 
   mainSection: {

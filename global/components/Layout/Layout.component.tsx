@@ -21,7 +21,7 @@ export const Layout = ({
       className={classes.app}
       classNames={{ body: classes.main, main: classes.main }}
     >
-      <Container className={classes.main}>{children}</Container>
+      <Container className={classes.pageRoot}>{children}</Container>
     </AppShell>
   );
 };

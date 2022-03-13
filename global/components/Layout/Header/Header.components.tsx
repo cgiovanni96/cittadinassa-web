@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Group, Burger, Text } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import { headerStyles } from "../styles";
 import { UserMenu } from "./UserMenu.component";

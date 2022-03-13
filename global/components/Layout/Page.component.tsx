@@ -8,7 +8,12 @@ export type PageProps = {
 export const Page = (props: PageProps) => {
   return (
     <Center>
-      <Container style={{ width: props.width ? props.width : "100%" }}>
+      <Container
+        sx={(theme) => ({
+          width: props.width ? props.width : "100%",
+          padding: theme.spacing.xs,
+        })}
+      >
         {props.children}
       </Container>
     </Center>

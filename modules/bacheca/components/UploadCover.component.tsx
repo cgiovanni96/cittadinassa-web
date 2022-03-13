@@ -1,50 +1,77 @@
-import { Button, Group, Text } from "@mantine/core";
+import { Button, Container, Group, Text, Title } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { useState } from "react";
-import { useUploadCover } from "../api/hooks";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 
-export const UploadCover = () => {
-  //   return <>UploadCover</>;
+export type UploadCoverProps = {
+  setInfo: (file: File | undefined) => void;
+};
+
+export const UploadCover = ({ setInfo }: UploadCoverProps) => {
   const [file, setFile] = useState<File>();
+  const [preview, setPreview] = useState<string | undefined>(undefined);
 
-  const { mutate } = useUploadCover();
-
-  const uploadFile = () => {
-    const data = new FormData();
-    if (!file) return;
-    data.append("file", file);
-
-    mutate(data);
-  };
+  useEffect(() => {
+    if (file) {
+      setPreview(URL.createObjectURL(file));
+      setInfo(file);
+    } else {
+      setPreview(undefined);
+      setInfo && setInfo(undefined);
+    }
+  }, [file]);
 
   return (
     <>
-      <Dropzone
-        onDrop={(files) => setFile(files[0])}
-        maxSize={3 * 1024 ** 2}
-        accept={IMAGE_MIME_TYPE}
-      >
-        {(status) => (
-          <Group
-            position="center"
-            spacing="xl"
-            style={{ minHeight: 220, pointerEvents: "none" }}
-          >
-            <div>
-              <Text size="xl" inline>
-                Drag images here or click to select files
-              </Text>
-              <Text size="sm" color="dimmed" inline mt={7}>
-                Attach as many files as you like, each file should not exceed
-                5mb
-              </Text>
-            </div>
-          </Group>
-        )}
-      </Dropzone>
+      <Title order={2}>Cover</Title>
+      {!preview && (
+        <Dropzone
+          onDrop={(files) => setFile(files[0])}
+          maxSize={3 * 1024 ** 2}
+          accept={IMAGE_MIME_TYPE}
+        >
+          {(status) => (
+            <Group
+              position="center"
+              spacing="xl"
+              style={{ height: 220, pointerEvents: "none" }}
+            >
+              <div>
+                <Text size="xl" inline>
+                  Trascina immagine o clicca qui per caricare
+                </Text>
+                <Text size="sm" color="dimmed" inline mt={7}>
+                  Dimensione massima: 5 MB
+                </Text>
+              </div>
+            </Group>
+          )}
+        </Dropzone>
+      )}
 
-      <Text>{file && file.name}</Text>
-      <Button onClick={uploadFile}>Carica</Button>
+      {preview && (
+        <>
+          <Container
+            sx={{
+              width: "100%",
+              height: 250,
+              position: "relative",
+              padding: "0",
+            }}
+          >
+            <Image src={preview} alt={"uploaded preview"} layout="fill" />
+            <Group position="right">
+              <Button
+                variant="light"
+                color="red"
+                onClick={() => setFile(undefined)}
+              >
+                X
+              </Button>
+            </Group>
+          </Container>
+        </>
+      )}
     </>
   );
 };
