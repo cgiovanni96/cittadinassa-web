@@ -11,9 +11,9 @@ import Image from "next/image";
 
 import { Emoji } from "@global/components/Emoji.component";
 import Fish from "@model/Net/Fish.model";
-import { NoCoverTitle } from "@modules/bacheca/components/FishElements/NoCoverTitle.element";
-import { StatusBadge } from "@modules/bacheca/components/FishElements/StatusBadge.element";
 import Link from "next/link";
+import { NoCoverTitle } from "@modules/bacheca/shared/ui/NoCoverTitle.element";
+import { StatusBadge } from "@modules/bacheca/shared/components/StatusBadge.element";
 
 export type FishCardProps = {
   fish: Fish;
@@ -23,7 +23,11 @@ export const FishCard = ({ fish }: FishCardProps) => {
   const theme = useMantineTheme();
 
   return (
-    <Card shadow="sm" padding="lg">
+    <Card
+      shadow="sm"
+      padding="lg"
+      sx={{ display: "flex", flexDirection: "column" }}
+    >
       <Card.Section
         sx={{
           position: "relative",
@@ -31,19 +35,19 @@ export const FishCard = ({ fish }: FishCardProps) => {
           marginBottom: theme.spacing.sm,
         }}
       >
-        {fish.media.cover && (
+        {fish.media.cover ? (
           <Image
             src={fish.media.cover.url}
             layout="fill"
             alt={fish.media.cover.name}
           />
+        ) : (
+          <NoCoverTitle
+            title={fish.name}
+            emoji={fish.media.emoji}
+            color={fish.media.color}
+          />
         )}
-
-        <NoCoverTitle
-          title={fish.name}
-          emoji={fish.media.emoji}
-          color={fish.media.color}
-        />
       </Card.Section>
 
       <Group position="apart" style={{ marginBottom: 5 }}>
@@ -55,7 +59,12 @@ export const FishCard = ({ fish }: FishCardProps) => {
         <StatusBadge status={fish.status} />
       </Group>
 
-      <Spoiler maxHeight={60} showLabel="..." hideLabel="Nascondi">
+      <Spoiler
+        maxHeight={60}
+        showLabel="..."
+        hideLabel="Nascondi"
+        sx={{ flex: "1" }}
+      >
         <Text
           size="sm"
           align="justify"

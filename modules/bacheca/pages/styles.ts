@@ -4,7 +4,7 @@ export const headerStyles = createStyles(
   (theme, color: string | undefined) => ({
     header: {
       maxWidth: "100vw",
-      width: "100vw",
+      width: "100%",
       background: theme.colors.dark[8],
       paddingTop: theme.spacing.xl,
       paddingBottom: theme.spacing.xl,

@@ -3,7 +3,8 @@ import { Button, Menu } from "@mantine/core";
 
 import { EmojiPicker } from "@global/components/EmojiPicker.component";
 import { Control, Controller } from "react-hook-form";
-import { FishFormData } from "../Fish.form";
+import { FishFormData } from "./Fish.form";
+import { DATA } from "../new.data";
 
 export type EmojiPickerInputProps = {
   control: Control<FishFormData, any>;
@@ -23,7 +24,7 @@ export const EmojiPickerInput = ({ control }: EmojiPickerInputProps) => {
           clickOutsideEvents={["mouseup", "touchend"]}
           control={
             <Button onClick={() => setEmojiPicker(!openEmoji)} variant="subtle">
-              Emoji:
+              {DATA.FIELDS.EMOJI.LABEL}
               {field.value && (
                 <span role="image" aria-label={field.value}>
                   {field.value}

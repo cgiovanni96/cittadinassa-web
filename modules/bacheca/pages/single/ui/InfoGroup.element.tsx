@@ -1,14 +1,14 @@
+import { Children } from "@lib/types/Children.type";
 import { Group, Text } from "@mantine/core";
 import React from "react";
 
 export type InfoGroupElementProps = {
   description: string;
-  element: React.ReactNode;
-};
+} & Children;
 
 export const InfoGroupElement = ({
   description,
-  element,
+  children,
 }: InfoGroupElementProps) => {
   return (
     <Group
@@ -18,7 +18,7 @@ export const InfoGroupElement = ({
       <Text sx={(theme) => ({ color: theme.colors.gray[7], width: 50 })}>
         {description}
       </Text>
-      <Text sx={{ color: "white" }}>{element}</Text>
+      <Text sx={{ color: "white" }}>{children}</Text>
     </Group>
   );
 };

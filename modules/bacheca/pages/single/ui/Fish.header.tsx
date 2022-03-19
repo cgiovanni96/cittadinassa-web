@@ -1,10 +1,11 @@
 import { Emoji } from "@global/components/Emoji.component";
 import { Container, Text, Group, Title, createStyles } from "@mantine/core";
 import Fish from "@model/Net/Fish.model";
-import { InfoGroupElement } from "../FishElements/InfoGroup.element";
-import { StatusBadge } from "../FishElements/StatusBadge.element";
-import { TypeBadgeElement } from "../FishElements/TypeBadge.element";
-import { headerStyles } from "./styles";
+import { InfoGroupElement } from "./InfoGroup.element";
+import { TypeBadgeElement } from "./TypeBadge.element";
+import { headerStyles } from "../../styles";
+import { StatusBadge } from "@modules/bacheca/shared/components/StatusBadge.element";
+import { DATA } from "../single.data";
 
 export type FishHeaderProps = {
   fish: Fish;
@@ -28,15 +29,13 @@ export const FishHeader = ({ fish }: FishHeaderProps) => {
             {fish.introduction}
           </Text>
 
-          <InfoGroupElement
-            description="Tipo"
-            element={<TypeBadgeElement type={fish.type} />}
-          />
+          <InfoGroupElement description={DATA.HEADER.TYPE}>
+            <TypeBadgeElement type={fish.type} />
+          </InfoGroupElement>
 
-          <InfoGroupElement
-            description="Stato"
-            element={<StatusBadge status={fish.status} />}
-          />
+          <InfoGroupElement description={DATA.HEADER.STATUS}>
+            <StatusBadge status={fish.status} />
+          </InfoGroupElement>
         </Container>
       </Container>
       <span className={classes.divider}></span>

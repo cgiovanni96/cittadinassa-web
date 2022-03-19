@@ -1,6 +1,6 @@
 import { SimpleGrid, Title } from "@mantine/core";
 import Fish from "@model/Net/Fish.model";
-import { FishCard } from "./Fish.card";
+import { FishCard } from "../components/Fish.card";
 
 export type FishSectionProps = {
   title: string;
@@ -19,7 +19,7 @@ export const FishSection = ({ title, fishes }: FishSectionProps) => {
 
       <SimpleGrid
         cols={3}
-        spacing="sm"
+        spacing="lg"
         sx={(theme) => ({ marginTop: theme.spacing.md })}
         breakpoints={[
           { maxWidth: "xs", cols: 1, spacing: "sm" },
@@ -28,8 +28,6 @@ export const FishSection = ({ title, fishes }: FishSectionProps) => {
       >
         {fishes.map((fish) => (
           <>
-            <FishCard key={fish.codename} fish={fish} />
-            <FishCard key={fish.codename} fish={fish} />
             <FishCard key={fish.codename} fish={fish} />
           </>
         ))}

@@ -1,4 +1,5 @@
 import { ColorInput } from "@mantine/core";
+import { DATA } from "../new.data";
 
 export type ColorInputType = {
   color: string;
@@ -9,9 +10,9 @@ export const ColorPickerInput = ({ color, setColor }: ColorInputType) => {
   return (
     <ColorInput
       format="hex"
-      label="Colore"
+      label={DATA.FIELDS.COLOR.LABEL}
       variant="default"
-      placeholder="Scegli un colore identificativo"
+      placeholder={DATA.FIELDS.COLOR.PLACEHOLDER}
       value={color}
       onChange={setColor}
       swatches={[

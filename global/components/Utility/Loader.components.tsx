@@ -13,7 +13,7 @@ export const Loader = () => {
         marginBottom: 200,
       }}
     >
-      <MantineLoader variant="bars" sx={{ width: 60 }} color="gray" />
+      <MantineLoader variant="oval" sx={{ width: 30 }} color="blue" />
     </Container>
   );
 };

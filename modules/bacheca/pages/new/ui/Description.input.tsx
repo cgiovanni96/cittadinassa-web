@@ -1,6 +1,6 @@
 import Editor from "@global/components/Editor/Editor.component";
 import { Control, Controller } from "react-hook-form";
-import { FishFormData } from "../Fish.form";
+import { FishFormData } from "../components/Fish.form";
 
 export type DescriptionInputProps = {
   control: Control<FishFormData, null>;

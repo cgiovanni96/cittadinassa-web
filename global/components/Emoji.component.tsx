@@ -6,7 +6,6 @@ export type EmojiProps = {
 };
 
 export const Emoji = ({ emoji, onClick, size, className }: EmojiProps) => {
-  console.log("SIZE", size);
   return (
     <span
       className={className && className}

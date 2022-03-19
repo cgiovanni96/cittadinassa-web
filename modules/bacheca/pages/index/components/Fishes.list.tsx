@@ -1,7 +1,8 @@
 import { Loader } from "@global/components/Utility/Loader.components";
 
 import { useGetFishes } from "@modules/bacheca/api/hooks";
-import { FishSection } from "./Fishes.section";
+import { DATA } from "../index.data";
+import { FishSection } from "../ui/Fishes.section";
 
 export const FishList = () => {
   const { data, isSuccess, isLoading } = useGetFishes();
@@ -13,15 +14,18 @@ export const FishList = () => {
       {isSuccess && data && data.fishes && (
         <>
           {data.fishes.events.length > 0 && (
-            <FishSection title="Eventi" fishes={data.fishes.events} />
+            <FishSection title={DATA.LIST.EVENTS} fishes={data.fishes.events} />
           )}
 
           {data.fishes.groups.length > 0 && (
-            <FishSection title="Gruppi" fishes={data.fishes.groups} />
+            <FishSection title={DATA.LIST.GROUPS} fishes={data.fishes.groups} />
           )}
 
           {data.fishes.events.length > 0 && (
-            <FishSection title="Progetti" fishes={data.fishes.projects} />
+            <FishSection
+              title={DATA.LIST.PROJECTS}
+              fishes={data.fishes.projects}
+            />
           )}
         </>
       )}

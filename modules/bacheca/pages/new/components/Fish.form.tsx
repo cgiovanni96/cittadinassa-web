@@ -6,15 +6,17 @@ import { z } from "zod";
 import { useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 
-import { DescriptionInput } from "./Inputs/Description.input";
-import { ColorPickerInput } from "./Inputs/ColorPicker.input";
-import { EmojiPickerInput } from "./Inputs/EmojiPicker.input";
-import { TypeSelectInput } from "./Inputs/TypeSelect.input";
-import { SectionDivider } from "./SectionDivider.component";
 import { useCreateFish, useUploadCover } from "@modules/bacheca/api/hooks";
 import { FISH_TYPE } from "@model/Net/Fish.model";
 import { CreateFishDto } from "@modules/bacheca/api/fish.dto";
 import { calls } from "data/api.data";
+import { EmojiPickerInput } from "./EmojiPicker.menu";
+
+import { SectionDivider } from "../ui/SectionDivider.ui";
+import { TypeSelectInput } from "../ui/TypeSelect.input";
+import { ColorPickerInput } from "../ui/ColorPicker.input";
+import { DescriptionInput } from "../ui/Description.input";
+import { DATA } from "../new.data";
 
 const formatDto = (data: FishFormData): CreateFishDto => {
   return {
@@ -101,7 +103,7 @@ export const FishForm = ({ cover }: FishFormProps) => {
 
   return (
     <>
-      <SectionDivider title="Info" order={2} />
+      <SectionDivider title={DATA.SECTIONS.INFO} order={2} />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <Group spacing="xl" align="flex-end">
@@ -112,8 +114,8 @@ export const FishForm = ({ cover }: FishFormProps) => {
           <TextInput
             variant="default"
             id="0"
-            placeholder={"Nome"}
-            label={"Nome"}
+            placeholder={DATA.FIELDS.NAME.PLACEHOLDER}
+            label={DATA.FIELDS.NAME.LABEL}
             required
             sx={{ flex: "1" }}
             {...register("name")}
@@ -123,12 +125,12 @@ export const FishForm = ({ cover }: FishFormProps) => {
           <ColorPickerInput color={color} setColor={setColor} />
         </Group>
 
-        <SectionDivider title="Introduzione" order={2} />
+        <SectionDivider title={DATA.SECTIONS.INTRODUCTION} order={2} />
 
         <Textarea
-          label="Introduzione"
+          label={DATA.FIELDS.INTRODUCTION.LABEL}
           variant="default"
-          placeholder="Breve introduzione del progetto"
+          placeholder={DATA.FIELDS.INTRODUCTION.PLACEHOLDER}
           minRows={2}
           maxRows={4}
           required
@@ -136,12 +138,12 @@ export const FishForm = ({ cover }: FishFormProps) => {
           error={errors.introduction?.message}
         />
 
-        <SectionDivider title="Descrizione" order={2} />
+        <SectionDivider title={DATA.SECTIONS.DESCRIPTION} order={2} />
 
         <DescriptionInput control={control} />
 
         <Button type="submit" loading={fishMutation.isLoading}>
-          Create
+          {DATA.CREATE}
         </Button>
       </form>
     </>

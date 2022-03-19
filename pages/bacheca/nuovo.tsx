@@ -1,6 +1,6 @@
 import { Page } from "@global/components/Layout/Page.component";
-import { FishForm } from "@modules/bacheca/components/Form/Fish.form";
-import { UploadCover } from "@modules/bacheca/components/UploadCover.component";
+import { FishForm } from "@modules/bacheca/pages/new/components/Fish.form";
+import { UploadCover } from "@modules/bacheca/pages/new/components/UploadCover.picker";
 import { useState } from "react";
 
 const New = () => {

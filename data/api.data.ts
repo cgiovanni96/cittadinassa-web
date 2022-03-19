@@ -8,4 +8,6 @@ export enum calls {
   uploadCover = "uploadCover",
   createFish = "createFish",
   getFish = "getFish",
+  getFiles = "getFiles",
+  getFile = "getFile",
 }

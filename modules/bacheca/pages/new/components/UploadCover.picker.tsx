@@ -2,6 +2,7 @@ import { Button, Container, Group, Text, Title } from "@mantine/core";
 import { Dropzone, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { DATA } from "../new.data";
 
 export type UploadCoverProps = {
   setInfo: (file: File | undefined) => void;
@@ -23,7 +24,7 @@ export const UploadCover = ({ setInfo }: UploadCoverProps) => {
 
   return (
     <>
-      <Title order={2}>Cover</Title>
+      <Title order={2}>{DATA.SECTIONS.COVER}</Title>
       {!preview && (
         <Dropzone
           onDrop={(files) => setFile(files[0])}
@@ -38,10 +39,7 @@ export const UploadCover = ({ setInfo }: UploadCoverProps) => {
             >
               <div>
                 <Text size="xl" inline>
-                  Trascina immagine o clicca qui per caricare
-                </Text>
-                <Text size="sm" color="dimmed" inline mt={7}>
-                  Dimensione massima: 5 MB
+                  {DATA.FIELDS.COVER.LABEL}
                 </Text>
               </div>
             </Group>
